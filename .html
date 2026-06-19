@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Hello World - 即将跳转</title>
     <style>
         /* 页面样式 - 让内容居中显示 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
@@ -24,6 +25,7 @@
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.25);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
         }
         h1 {
             font-size: 72px;
@@ -32,9 +34,58 @@
             margin: 0;
             letter-spacing: 4px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1.5s ease-out;
         }
         p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 16px;
+            letter-spacing: 2px;
+        }
+        .timer {
+            font-size: 48px;
+            color: #fff;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 40px 30px; }
+            h1 { font-size: 44px; }
+            .timer { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello World</h1>
+        <p>欢迎来到我的第一个网页</p>
+        <div class="timer" id="countdown">3</div>
+        <p style="font-size: 14px; opacity: 0.6;">秒后自动跳转...</p>
+    </div>
+
+    <script>
+        // 设置跳转目标地址（请修改为您的实际地址）
+        const TARGET_URL = '/404.html';  // 相对路径，指向您的 404 页面
+        // 如果跳转到外部链接，使用完整URL，例如：
+        // const TARGET_URL = 'https://wedonot2026.github.io/HELLIO/404.html';
+        
+        let seconds = 3;
+        const countdownEl = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            seconds -= 1;
+            countdownEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = TARGET_URL;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>        p {
             font-size: 18px;
             color: rgba(255, 255, 255, 0.8);
             margin-top: 16px;
